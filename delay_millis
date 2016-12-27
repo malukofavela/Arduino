@@ -1,0 +1,41 @@
+#define pinLedVd 3
+#define pinLedVm 2
+#define pinBotao 4
+
+boolean estadoBotao = true;
+boolean estadoAntBotao = true;
+boolean estadoPisca = false;
+
+unsigned long delay1 = 0;
+
+void setup() {
+  pinMode(pinLedVd, OUTPUT);
+  pinMode(pinLedVm, OUTPUT);
+  pinMode(pinBotao, INPUT_PULLUP);
+
+  digitalWrite(pinLedVd, HIGH);
+}
+
+void loop() {
+
+  estadoBotao = digitalRead(pinBotao);
+  if (!estadoBotao && estadoAntBotao){
+    estadoPisca = !estadoPisca;
+  }
+  estadoAntBotao = estadoBotao;
+
+  if (estadoPisca) {
+
+    if ((millis() - delay1) >= 500) {
+      digitalWrite(pinLedVm, HIGH);
+    } else {
+       digitalWrite(pinLedVm, LOW);
+    }
+     if ((millis() - delay1) >= 1000) {
+      delay1 = millis();
+     }
+  } else {
+    digitalWrite(pinLedVm, LOW);
+  }
+
+}
