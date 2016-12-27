@@ -1,0 +1,91 @@
+int pinVermelho = 12;
+int pinAmarelo = 11;
+int pinVerde = 10;
+int pinBotao = 7;
+int pinPedestreVermelho = 9;
+int pinPedestreVerde = 8;
+
+int faseSemaforo;
+
+int estadoBotao;
+int estadoAnteriorBotao;
+
+int tempoPisca;
+int estadoPisca;
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(pinVerde, OUTPUT);
+  pinMode(pinAmarelo, OUTPUT);
+  pinMode(pinVermelho, OUTPUT);
+  pinMode(pinBotao, INPUT_PULLUP);
+  pinMode(pinPedestreVerde, OUTPUT);
+  pinMode(pinPedestreVermelho, OUTPUT);
+
+  faseSemaforo = 1;
+
+  estadoAnteriorBotao = digitalRead(pinBotao);
+
+  tempoPisca = 0;
+  estadoPisca = HIGH;
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+  estadoBotao = digitalRead(pinBotao);
+
+  if ((estadoBotao == HIGH) && (estadoAnteriorBotao == LOW)) {
+    
+    if (faseSemaforo < 4){
+      faseSemaforo = faseSemaforo + 1;
+    } else {
+      faseSemaforo = 1;
+    }
+  }
+  
+  estadoAnteriorBotao = estadoBotao;
+
+  if (faseSemaforo == 1) { //SEMAFORO VERDE
+    digitalWrite(pinVerde, HIGH);
+    digitalWrite(pinAmarelo, LOW);
+    digitalWrite(pinVermelho, LOW);
+    
+    digitalWrite(pinPedestreVermelho, HIGH);
+    digitalWrite(pinPedestreVerde, LOW);
+  }
+  
+  if (faseSemaforo == 2) { //SEMAFORO AMARELO
+    digitalWrite(pinVerde, LOW);
+    digitalWrite(pinAmarelo, HIGH);
+    digitalWrite(pinVermelho, LOW);
+    
+    digitalWrite(pinPedestreVerde, LOW);
+    digitalWrite(pinPedestreVermelho, HIGH);
+  }
+  
+  if (faseSemaforo == 3) { //SEMAFORO VERMELHO
+    digitalWrite(pinVerde, LOW);
+    digitalWrite(pinAmarelo, LOW);
+    digitalWrite(pinVermelho, HIGH);
+    
+    digitalWrite(pinPedestreVerde, HIGH);
+    digitalWrite(pinPedestreVermelho, LOW);
+  }
+
+  if (faseSemaforo == 4) { //SEMAFORO PEDESTRE PISCANDO
+    digitalWrite(pinVerde, LOW);
+    digitalWrite(pinAmarelo, LOW);
+    digitalWrite(pinVermelho, HIGH);
+
+    tempoPisca = tempoPisca + 1;
+    if (tempoPisca == 400) {
+      estadoPisca = !estadoPisca;
+      tempoPisca = 0;
+    }
+    
+    digitalWrite(pinPedestreVerde, LOW);
+    digitalWrite(pinPedestreVermelho, estadoPisca);
+  }
+delay(1);
+}
