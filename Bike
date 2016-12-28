@@ -1,0 +1,100 @@
+#define BLYNK_PRINT Serial
+#include <SPI.h>
+#include <Ethernet.h>
+#include <BlynkSimpleEthernet.h>
+
+// You should get Auth Token in the Blynk App.
+char auth[] = "1052e71ead2f4ef986e2d03b8bedd54b";
+
+#define W5100_CS  10
+#define SDCARD_CS 4
+
+// Meu programa agora:
+#define pinLed1 12
+#define pinLed2 11
+#define pinLed3 10
+#define pinLed4 9
+#define pinLed5 8
+#define pinBotao 7
+
+int numero = 8;
+boolean botaoAtu = false;
+boolean botaoAnt = false;
+
+void setup() {
+  Serial.begin(9600);
+  Blynk.begin(auth);
+
+  
+  pinMode(pinBotao, INPUT);
+
+  pinMode(pinLed1, OUTPUT);
+  pinMode(pinLed2, OUTPUT);
+  pinMode(pinLed3, OUTPUT);
+  pinMode(pinLed4, OUTPUT);
+  pinMode(pinLed5, OUTPUT);
+}
+
+void loop() {
+  Blynk.run();
+
+  
+  botaoAtu = digitalRead(pinBotao);
+
+  if (botaoAtu && !botaoAnt) {
+    numero++;
+
+    if (numero > 7) {
+      numero = 0;
+    }
+  }
+  botaoAnt = botaoAtu;
+
+  switch (numero) {
+    case 0:
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      break;
+      
+    case 1:
+      digitalWrite(pinLed1, HIGH);
+      digitalWrite(pinLed2, HIGH);
+      digitalWrite(pinLed3, HIGH);
+      digitalWrite(pinLed4, HIGH);
+      digitalWrite(pinLed5, HIGH);
+      break;
+      
+    case 2:
+      break;
+      
+    case 3:
+      break;
+      
+    case 4:
+      break;
+      
+    case 5:
+      break;
+      
+    case 6:
+      break;
+      
+    case 7:
+      break;
+      
+    case 8:
+      break;
+      
+    default:
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      break;
+  }
+
+}
