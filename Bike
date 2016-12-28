@@ -4,17 +4,17 @@
 #include <BlynkSimpleEthernet.h>
 
 // You should get Auth Token in the Blynk App.
-char auth[] = "1052e71ead2f4ef986e2d03b8bedd54b";
+char auth[] = "05427bacb1fd4f5cb70dc745cc7604db";
 
 #define W5100_CS  10
 #define SDCARD_CS 4
 
 // Meu programa agora:
-#define pinLed1 12
-#define pinLed2 11
-#define pinLed3 10
-#define pinLed4 9
-#define pinLed5 8
+#define pinLed1 9
+#define pinLed2 8
+#define pinLed3 6
+#define pinLed4 5
+#define pinLed5 3
 #define pinBotao 7
 
 int numero = 8;
@@ -22,6 +22,9 @@ boolean botaoAtu = false;
 boolean botaoAnt = false;
 
 void setup() {
+  pinMode(SDCARD_CS, OUTPUT);
+  digitalWrite(SDCARD_CS, HIGH); // Deselect the SD card
+  
   Serial.begin(9600);
   Blynk.begin(auth);
 
@@ -38,6 +41,12 @@ void setup() {
 void loop() {
   Blynk.run();
 
+
+  // INTERVALOS
+  int intervalo1 = 100;
+  int intervalo2 = 500;
+  int intervalo3 = 200;
+  int intervalo4 = 50;
   
   botaoAtu = digitalRead(pinBotao);
 
@@ -52,14 +61,6 @@ void loop() {
 
   switch (numero) {
     case 0:
-      digitalWrite(pinLed1, LOW);
-      digitalWrite(pinLed2, LOW);
-      digitalWrite(pinLed3, LOW);
-      digitalWrite(pinLed4, LOW);
-      digitalWrite(pinLed5, LOW);
-      break;
-      
-    case 1:
       digitalWrite(pinLed1, HIGH);
       digitalWrite(pinLed2, HIGH);
       digitalWrite(pinLed3, HIGH);
@@ -67,25 +68,245 @@ void loop() {
       digitalWrite(pinLed5, HIGH);
       break;
       
+    case 1:
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo1);
+
+      digitalWrite(pinLed1, HIGH);
+      digitalWrite(pinLed2, HIGH);
+      digitalWrite(pinLed3, HIGH);
+      digitalWrite(pinLed4, HIGH);
+      digitalWrite(pinLed5, HIGH);
+      delay(intervalo1);
+      break;
+      
     case 2:
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo2);
+
+      digitalWrite(pinLed1, HIGH);
+      digitalWrite(pinLed2, HIGH);
+      digitalWrite(pinLed3, HIGH);
+      digitalWrite(pinLed4, HIGH);
+      digitalWrite(pinLed5, HIGH);
+      delay(intervalo1);
       break;
       
     case 3:
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, HIGH);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo1);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo3);
+
+      digitalWrite(pinLed1, HIGH);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, HIGH);
+      delay(intervalo1);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo2);
+
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, HIGH);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, HIGH);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo1);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo1);
       break;
       
     case 4:
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, HIGH);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo1);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo3);
+
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, HIGH);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, HIGH);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo1);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo2);
+
+      digitalWrite(pinLed1, HIGH);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, HIGH);
+      delay(intervalo1);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo3);
       break;
       
     case 5:
+      digitalWrite(pinLed1, HIGH);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, HIGH);
+      delay(intervalo4);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo4);
+
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, HIGH);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, HIGH);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo4);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo4);
+
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, HIGH);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo4);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo4);
       break;
       
     case 6:
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, HIGH);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo1);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo3);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, HIGH);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo1);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo2);
+
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, HIGH);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, HIGH);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo1);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo2);
+
+      digitalWrite(pinLed1, HIGH);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, HIGH);
+      delay(intervalo1);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo3);
+      digitalWrite(pinLed1, HIGH);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, HIGH);
+      delay(intervalo1);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo2);
+
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, HIGH);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, HIGH);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo1);
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
+      delay(intervalo2);
       break;
       
     case 7:
-      break;
-      
-    case 8:
+      digitalWrite(pinLed1, LOW);
+      digitalWrite(pinLed2, LOW);
+      digitalWrite(pinLed3, LOW);
+      digitalWrite(pinLed4, LOW);
+      digitalWrite(pinLed5, LOW);
       break;
       
     default:
