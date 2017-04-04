@@ -1,22 +1,41 @@
-const int brightnessUp = 10;     // the number of the pushbutton pin
-const int brightnessDown = 9;     // the number of the pushbutton pin
-const int ledPin =  13;      // the number of the LED pin
-const int maxBrightness = 12; //this can be any number - it's the number of steps between dimmest and brightest. 
+#include <IRremote.h>
+
+const int RECV_PIN = 11;
+const int ledR = 7;
+const int ledG = 6;
+const int ledB = 5;
+const int maxBrightness = 12;
 
 // variables will change:
 int brightness = maxBrightness;
 int interval=1;
+float value;
+
+IRrecv irrecv(RECV_PIN);
+decode_results results;
 
 void setup() {
   // initialize the LED pin as an output:
-  pinMode(ledPin, OUTPUT);      
-  // initialize the pushbutton pins as an input:
-  pinMode(brightnessUp, INPUT);     
-  pinMode(brightnessDown, INPUT);   
+  pinMode(ledR, OUTPUT);      
+  pinMode(ledG, OUTPUT);
+  pinMode(ledB, OUTPUT);
   Serial.begin(9600);
+  irrecv.enableIRIn();
 }
 
 void loop(){
+	if (irrecv.decode(&results)) {
+		Serial.print("Valor lido : ");
+	   Serial.println (results.value, HEX);
+		value = (results.value);
+		
+		if (value == 0xFF30CF) {
+		
+	}
+	}
+	
+	
+	
     if (digitalRead(brightnessUp) == HIGH && brightness < maxBrightness){ 
       brightness = brightness + interval; 
       //if the brightness Up button is pushed, add one degree of brightness to the current level
