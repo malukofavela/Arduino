@@ -1,0 +1,51 @@
+#include <SoftwareSerial.h>
+ 
+SoftwareSerial bluetooth(10, 11); // RX, TX
+int RLed = 5;
+int BLed = 6;
+int GLed = 3;
+String receivedBluetoothString = "";
+ 
+void setup() {
+  bluetooth.begin(9600);
+  pinMode(RLed, OUTPUT);
+  pinMode(BLed, OUTPUT);
+  pinMode(GLed, OUTPUT);
+}
+ 
+void loop() {
+  while (bluetooth.available() > 0) {
+ 
+    char receivedBluetoothChar = bluetooth.read();
+    receivedBluetoothString += receivedBluetoothChar;
+ 
+    if (receivedBluetoothChar == '\n') {
+
+      //Led Vermelho 
+      if (receivedBluetoothString.endsWith("Red\n")) {
+        analogWrite(RLed, 
+            receivedBluetoothString.toInt());
+      }
+
+      //Led Azul
+      if (receivedBluetoothString.endsWith("Blue\n")) {
+        analogWrite(BLed, 
+            receivedBluetoothString.toInt());
+      }
+
+      //Led Verde
+      if (receivedBluetoothString.endsWith("Green\n")) {
+        analogWrite(GLed, 
+            receivedBluetoothString.toInt());
+      }
+
+      Desliga todos os Leds
+      if (receivedBluetoothString.endsWith("Vermelho\n")) {
+        analogWrite(RLed, 
+            receivedBluetoothString.toInt());
+      }
+       
+      receivedBluetoothString = "";
+    }
+  }
+}
