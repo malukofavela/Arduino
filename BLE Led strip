@@ -4,6 +4,7 @@ SoftwareSerial bluetooth(10, 11); // RX, TX
 int RLed = 5;
 int BLed = 6;
 int GLed = 3;
+boolean ledState = HIGH;
 String receivedBluetoothString = "";
  
 void setup() {
@@ -39,10 +40,12 @@ void loop() {
             receivedBluetoothString.toInt());
       }
 
-      Desliga todos os Leds
-      if (receivedBluetoothString.endsWith("Vermelho\n")) {
-        analogWrite(RLed, 
-            receivedBluetoothString.toInt());
+      //Desliga/Liga todos os Leds
+      if (receivedBluetoothString.endsWith("Power\n")) {
+        digitalWrite(RLed, (ledState) ? HIGH : LOW);
+		digitalWrite(BLed, (ledState) ? HIGH : LOW);
+		digitalWrite(GLed, (ledState) ? HIGH : LOW);
+        ledState = !ledState;
       }
        
       receivedBluetoothString = "";
